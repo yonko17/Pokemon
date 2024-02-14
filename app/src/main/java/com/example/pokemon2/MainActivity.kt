@@ -2,8 +2,10 @@ package com.example.pokemon2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.example.pokemon2.data.Pokemon
-import com.example.pokemon2.data.PokemonModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,6 +16,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    lifecycleScope.launch(Dispatchers.IO){
+        fetchPokemon("pikachu")
+    }
+
     }
     suspend fun fetchPokemon(pokemonName: String) {
         val retrofit = Retrofit.Builder()
